@@ -32,15 +32,6 @@ theme.Box = {
 -->========================================[ Button ]=========================================<--
 theme.Button = {
   ---@param box GNUI.Button
-  All = function (box)
-    local spriteHover = GNUI.newNineslice(atlas,19,1,25,7 ,3,3,3,3, 2,2,2,2)
-    box.HoverBox:setNineslice(spriteHover):setAnchor(0,0,1,1):setCanCaptureCursor(false):setZMul(1.1)
-    box.BUTTON_CHANGED:register(function (pressed,hovering)
-      box.HoverBox:setVisible(hovering):setZMul(10)
-    end,"GNUI.Hover")
-    box.HoverBox:setVisible(false)
-  end,
-  ---@param box GNUI.Button
   Default = function (box)
     box.TextOffset = vec(0,2)
     box.HoverBox:setDimensions(0,-2,0,-2)
@@ -58,7 +49,7 @@ theme.Button = {
           :setTextOffset(box.TextOffset + vec(0,2))
           :setChildrenOffset(0,2)
           if not forced then
-            GNUI.playSound("minecraft:ui.button.click",1) -- click
+            GNUI.playSound("minecraft:ui.button.click",theme.pitch or 1,theme.volume or 1)  -- click
           end
         else
           box:setNineslice(spriteNormal)
@@ -69,6 +60,12 @@ theme.Button = {
     end
     box.BUTTON_CHANGED:register(update)
     update(false,false,true)
+    local spriteHover = GNUI.newNineslice(atlas,19,1,25,7 ,3,3,3,3, 2,2,2,2)
+    box.HoverBox:setNineslice(spriteHover):setAnchor(0,0,1,1):setCanCaptureCursor(false):setZMul(1.1)
+    box.BUTTON_CHANGED:register(function (pressed,hovering)
+      box.HoverBox:setVisible(hovering):setZMul(10)
+    end,"GNUI.Hover")
+    box.HoverBox:setVisible(false)
   end,
   ---@param box GNUI.Button
   Flat = function (box)
@@ -82,7 +79,7 @@ theme.Button = {
         wasPressed = pressed
         if pressed then
           box:setNineslice(spritePressed)
-          GNUI.playSound("minecraft:ui.button.click",1) -- click
+          GNUI.playSound("minecraft:ui.button.click",theme.pitch or 1,theme.volume or 1) -- click
         else
           box:setNineslice(spriteNormal)
         end
@@ -109,7 +106,7 @@ theme.Slider = {
       if pressed ~= wasPressed then
         wasPressed = pressed
         if pressed then
-          GNUI.playSound("minecraft:ui.button.click",1) -- click
+          GNUI.playSound("minecraft:ui.button.click",theme.pitch or 1,theme.volume or 1)  -- click
         else
         end
       end
