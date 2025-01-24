@@ -27,12 +27,12 @@ TextField.__type = "GNUI.TextField"
 
 
 ---@param parent GNUI.Box?
----@param variant string|"none"|"default"?
+---@param variant string|"none"|"empty"|"Default"?
 ---@param isMultiline boolean?
 ---@return GNUI.TextField
 function TextField.new(parent,isMultiline,variant)
 	---@type GNUI.TextField
-	local new = setmetatable(Button.new(parent,"none"),TextField)
+	local new = setmetatable(Button.new(parent,"empty"),TextField)
 	new.textField = ""
 	new.editingTextField = ""
 	new.isEditing = false

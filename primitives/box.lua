@@ -181,6 +181,9 @@ function Box.new(parent)
     isClipping = false,
     -->====================[ Canvas ]====================<--
     CANVAS_CHANGED = eventLib.new(),
+    -->====================[ Sound ]====================<--
+     Volume = 1,
+     Pitch = 1,
   },Box)
   
   -->==========[ Internals ]==========<--
@@ -231,7 +234,7 @@ function Box.new(parent)
   return new
 end
 
----Sets the visibility of the element and its children
+---Sets the visibility of the element
 ---@param visible boolean
 ---@generic self
 ---@param self self
@@ -331,6 +334,8 @@ function Box:addChild(child,index)
   if child.Parent ~= self then
     local old_parent = child.Parent
     child.Parent = self
+    child.Volume = self.Volume
+    child.Pitch = self.Pitch
     child.PARENT_CHANGED:invoke(self,old_parent)
     self.CHILDREN_ADDED:invoke(child)
   end
@@ -1473,6 +1478,42 @@ function Box:setTextOffset(x,y)
   ---@cast self GNUI.Box
   self.TextOffset = utils.vec2(x,y)
   self:repositionText()
+  return self
+end
+
+-->========================================[ Text ]=========================================<--
+
+--- I don't use a language server with the annotations
+
+---Sets the Volume of the element and its children.
+---@generic self
+---@param volume number?
+---@param self self
+---@return self
+function Box:setVolume(volume)
+  volume = volume or 1
+  if self.Volume ~= volume then
+    self.Volume = volume
+    for _, child in pairs(self.Children) do
+      child:setVolume(volume)
+    end
+  end
+  return self
+end
+
+---Sets the Pitch of the element and its children.
+---@generic self
+---@param pitch number?
+---@param self self
+---@return self
+function Box:setPitch(pitch)
+  pitch = pitch or 1
+  if self.Pitch ~= pitch then
+    self.Pitch = pitch
+    for _, child in pairs(self.Children) do
+      child:setPitch(pitch)
+    end
+  end
   return self
 end
 

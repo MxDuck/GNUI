@@ -69,7 +69,7 @@ local cache = {}
 
 ---Styles a given class using the theme script, the single lua file in the theme folder.
 ---@param object any
----@param variant string|"none"|"Default"?
+---@param variant string|"none"|"empty"|"Default"?
 function Theme.style(object,variant)
   local class
   if cache[object.__type] then
@@ -83,7 +83,7 @@ function Theme.style(object,variant)
   if not theme[class] then
     return object
   end
-  if theme[class].All then
+  if variant ~= "none" and  theme[class].All then
     theme[class].All(object)
   end
   if theme[class] and theme[class][variant] then

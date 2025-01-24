@@ -36,11 +36,11 @@ Slider.__type = "GNUI.Slider"
 ---@param value number
 ---@param parent GNUI.Box?
 ---@param showNumber boolean?
----@param variant string|"none"|"default"?
+---@param variant string|"none"|"empty"|"Default"?
 ---@return GNUI.Slider
 function Slider.new(isVertical,min,max,step,value,parent,showNumber,variant)
   ---@type GNUI.Slider
-  local new = setmetatable(Button.new(parent,"none"),Slider)
+  local new = setmetatable(Button.new(parent,"empty"),Slider)
   
   new.min = min
   new.max = max

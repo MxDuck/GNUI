@@ -58,7 +58,7 @@ theme.Button = {
           :setTextOffset(box.TextOffset + vec(0,2))
           :setChildrenOffset(0,2)
           if not forced then
-            GNUI.playSound("minecraft:ui.button.click",1) -- click
+            GNUI.playSound("minecraft:ui.button.click",box.Pitch,box.Volume) -- click
           end
         else
           box:setNineslice(spriteNormal)
@@ -82,7 +82,7 @@ theme.Button = {
         wasPressed = pressed
         if pressed then
           box:setNineslice(spritePressed)
-          GNUI.playSound("minecraft:ui.button.click",1) -- click
+          GNUI.playSound("minecraft:ui.button.click",box.Pitch,box.Volume) -- click
         else
           box:setNineslice(spriteNormal)
         end
@@ -109,7 +109,7 @@ theme.Slider = {
       if pressed ~= wasPressed then
         wasPressed = pressed
         if pressed then
-          GNUI.playSound("minecraft:ui.button.click",1) -- click
+          GNUI.playSound("minecraft:ui.button.click",box.Pitch,box.Volume) -- click
         else
         end
       end
